@@ -28,9 +28,6 @@ function App() {
                         <Route path="/*" element={<Error404 />} />
                         {/*<Route path="/*" element={<Navigate to={"/error404"} />} />*/}
                     </Routes>
-                    {/*<PageOne/>*/}
-                    {/*<PageTwo/>*/}
-                    {/*<PageThree/>*/}
                 </div>
             </div>
             <div className={styles.footer}>abibas 2023</div>
