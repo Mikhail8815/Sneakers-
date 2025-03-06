@@ -15,6 +15,7 @@ const PATH = {
     PAGE2: '/puma',
     PAGE3: '/abibas',
     PAGE4: '/prices'
+    
 
 } as const
 
