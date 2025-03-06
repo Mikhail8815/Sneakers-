@@ -1,4 +1,3 @@
-import React from 'react';
 import adidasModel1 from './../../assets/adidas/AdiFOM_TRXN_Shoes_Black_IG7453_01_standard.webp'
 import adidasModel2 from './../../assets/adidas/Superstar_XLG_Shoes_Black_IG9777_01_standard.webp'
 import adidasModel3
