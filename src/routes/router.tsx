@@ -10,19 +10,20 @@ import App from "../App";
 import { Error404 } from "../components/pages/Error404";
 import { Adidas } from "../components/pages/Adidas";
 import { Puma } from "../components/pages/Puma";
-import { Croses } from "../components/pages/Croses";
 import { Abibas } from "../components/pages/Abibas";
 import { Prices } from "../components/pages/Prices";
 import { Model } from "../components/pages/Model";
+import { ProtectedPage } from "../components/pages/ProtectedPage";
+import { ProtectedRoute } from "./ProtectedRote";
 
-const PATH = {
+export const PATH = {
     ADIDAS: '/adidas',
     PUMA: '/puma',
     ABIBAS: '/abibas',
     PRICES: '/prices',
-    MODEL: '/:model/:id'
-    
-
+    MODEL: '/:model/:id',
+    PROTECTED_PAGE: '/protected-page',
+    ERROR: '/error'
 } as const
 
 export const router = createBrowserRouter([
@@ -46,11 +47,20 @@ export const router = createBrowserRouter([
         }, {
             path: PATH.MODEL,
             element: <Model/>,
+        }, {
+          path: PATH.PROTECTED_PAGE,
+          element: (
+            <ProtectedRoute>
+                 <ProtectedPage/>
+            </ProtectedRoute> 
+          )
+        }, {
+          path: PATH.ERROR,
+          element: <Error404/>
+        }, {
+          path: '*',
+          element: <Error404/>
         }],
-  },
-  {
-    path: "about",
-    element: <div>About</div>,
   },
 ]);
 

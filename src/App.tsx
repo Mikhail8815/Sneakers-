@@ -8,15 +8,8 @@ import {Error404} from "./components/pages/Error404";
 import {S} from './components/pages/_styles'
 import {Model} from "./components/pages/Model";
 import {Prices} from "./components/pages/Prices";
+import { PATH } from './routes/router';
 
-const PATH = {
-    ADIDAS: '/adidas',
-    PUMA: '/puma',
-    ABIBAS: '/abibas',
-    PRICES: '/prices'
-    
-
-} as const
 function App() {
     return (
         <div>
@@ -27,6 +20,7 @@ function App() {
                     <S.NavWrapper><NavLink to={PATH.PUMA}>Puma</NavLink></S.NavWrapper>
                     <S.NavWrapper><NavLink to={PATH.ABIBAS}>Abibas</NavLink></S.NavWrapper>
                     <S.NavWrapper><NavLink to={PATH.PRICES}>Prices</NavLink></S.NavWrapper>
+                    <S.NavWrapper><NavLink to={PATH.PROTECTED_PAGE}>Protected Page</NavLink></S.NavWrapper>
 
                 </div>
                 <div className={styles.content}>
