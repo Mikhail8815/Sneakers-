@@ -5,6 +5,9 @@ import {
   RouterProvider,
   Route,
   Link,
+  Navigate,
+  RouteObject,
+  Outlet,
 } from "react-router-dom";
 import App from "../App";
 import { Error404 } from "../components/pages/Error404";
@@ -15,6 +18,7 @@ import { Prices } from "../components/pages/Prices";
 import { Model } from "../components/pages/Model";
 import { ProtectedPage } from "../components/pages/ProtectedPage";
 import { ProtectedRoute } from "./ProtectedRote";
+import { Login } from "../components/pages/Login";
 
 export const PATH = {
     ADIDAS: '/adidas',
@@ -23,44 +27,60 @@ export const PATH = {
     PRICES: '/prices',
     MODEL: '/:model/:id',
     PROTECTED_PAGE: '/protected-page',
-    ERROR: '/error'
+    ERROR: '/error',
+    LOGIN: '/login'
 } as const
+
+
+export const PrivateRoutes = () => {
+    const isAuth = true
+    return isAuth ? <Outlet/> : <Navigate to={PATH.LOGIN}/>
+}
+
+const publicRoutes: RouteObject[] = [
+  {
+    path: PATH.ADIDAS,
+    element: <Adidas />,
+  }, {
+      path: PATH.PUMA,
+    element: <Puma/>,
+  }, {
+      path: PATH.ABIBAS,
+      element: <Abibas/>,
+  }, {
+      path: PATH.PRICES,
+      element: <Prices/>,
+  }, {
+      path: PATH.MODEL,
+      element: <Model/>,
+  }, {
+    path: PATH.ERROR,
+    element: <Error404/>
+  }, {
+    path: PATH.LOGIN,
+    element: <Login/>
+  }
+]
+
+const privateRoutes: RouteObject[] = [
+  {
+    path: PATH.PROTECTED_PAGE,
+    element:<ProtectedPage/>
+  }
+]
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
-    errorElement: <Error404/>,
+    errorElement: <Navigate to={PATH.ERROR}/>,
     children: [
-        {
-          path: PATH.ADIDAS,
-          element: <Adidas />,
-        }, {
-            path: PATH.PUMA,
-          element: <Puma/>,
-        }, {
-            path: PATH.ABIBAS,
-            element: <Abibas/>,
-        }, {
-            path: PATH.PRICES,
-            element: <Prices/>,
-        }, {
-            path: PATH.MODEL,
-            element: <Model/>,
-        }, {
-          path: PATH.PROTECTED_PAGE,
-          element: (
-            <ProtectedRoute>
-                 <ProtectedPage/>
-            </ProtectedRoute> 
-          )
-        }, {
-          path: PATH.ERROR,
-          element: <Error404/>
-        }, {
-          path: '*',
-          element: <Error404/>
-        }],
+      ...publicRoutes,
+      {
+        element: <PrivateRoutes/>,
+        children: privateRoutes
+      }
+       ],
   },
 ]);
 
